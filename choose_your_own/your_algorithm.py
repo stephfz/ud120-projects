@@ -28,12 +28,34 @@ plt.show()
 ################################################################################
 
 
-### your code here!  name your classifier object clf if you want the 
+### your code here!  name your classifier object clf if you want the
 ### visualization code (prettyPicture) to show you the decision boundary
+from sklearn.neighbors import KNeighborsClassifier
+
+neigh = KNeighborsClassifier(n_neighbors=3)
+neigh.fit(features_train, labels_train)
+
+pred = neigh.predict(features_test)
+
+from sklearn.metrics import accuracy_score
+print accuracy_score(pred, labels_test)
 
 
+########################
+### adaboost algorithm
+########################
+from time import time
+from sklearn.ensemble import AdaBoostClassifier
+print "-:: adaboost ::------------------"
+t0 = time()
+adab = AdaBoostClassifier(n_estimators=100, learning_rate=1)
+adab.fit(features_test, labels_test)
+print "training time adaboost:", round(time()-t0, 3), "s"
 
-
+t1 = time()
+print "score adaboost: ", str(adab.score(features_test, labels_test))
+print "prediction time adaboost:", round(time()-t1, 3), "s"
+print "---------------------------------"
 
 
 
